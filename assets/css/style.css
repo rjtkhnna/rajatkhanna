@@ -903,4 +903,69 @@ strong { font-weight: 600; color: var(--ink); }
 
 .platform-mark,
 .edu-mark { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 28%, transparent); }
+.edu-mark--logo { background: #fff; border-color: var(--rule-strong); }
+.edu-mark--logo img { width: 46px; height: 46px; object-fit: contain; display: block; }
 .platform-mark { color: var(--accent); }
+
+
+/* ============================================================
+   NAVY COMBINATION — navy nav + hero, navy headings,
+   one mid-page band (How I build), plus the contact band
+   ============================================================ */
+
+/* headings carry the navy */
+h2,
+h3 { color: var(--accent); }
+
+/* nav: solid navy bar */
+.nav {
+  background: var(--band);
+  border-bottom-color: var(--band-rule);
+}
+.nav.is-stuck { border-bottom-color: var(--band-rule); }
+.nav-mark { color: var(--on-band); }
+.nav-mark-role { color: var(--on-band-soft); }
+.nav-links a { color: var(--on-band-soft); }
+.nav-links a:hover,
+.nav-links a.is-active { color: var(--on-band); }
+.nav-links a::after { background: var(--on-band); }
+.theme-toggle { border-color: var(--band-rule); color: var(--on-band-soft); }
+.theme-toggle:hover { border-color: var(--on-band-soft); color: var(--on-band); }
+
+/* bands: hero + principles share the inverted palette */
+.hero,
+.section-band {
+  background: var(--band);
+  color: var(--on-band);
+}
+.hero h1,
+.hero .lede,
+.hero strong,
+.section-band h2,
+.section-band h3,
+.section-band strong { color: var(--on-band); }
+.hero .eyebrow,
+.hero .hero-body,
+.section-band .section-kicker,
+.section-band .section-sub,
+.section-band .principle p { color: var(--on-band-soft); }
+.section-band .principle-num { color: var(--on-band); }
+.section-band .principle,
+.section-band .principle:last-child { border-color: var(--band-rule); }
+.hero-portrait::after { border-color: var(--band-rule); }
+
+.hero .btn-primary {
+  background: var(--on-band);
+  border-color: var(--on-band);
+  color: var(--band);
+}
+.hero .btn-primary:hover { background: #fff; border-color: #fff; color: var(--band); }
+.hero .btn-ghost {
+  border-color: color-mix(in srgb, var(--on-band) 42%, transparent);
+  color: var(--on-band);
+  background: transparent;
+}
+.hero .btn-ghost:hover {
+  border-color: var(--on-band);
+  background: color-mix(in srgb, var(--on-band) 10%, transparent);
+}
