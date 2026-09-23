@@ -16,6 +16,12 @@
   --accent:      #1b3a5c;
   --accent-soft: #e8eef4;
 
+  /* inverted colour bands */
+  --band:         #1b3a5c;
+  --on-band:      #f7fafc;
+  --on-band-soft: rgba(247, 250, 252, 0.78);
+  --band-rule:    rgba(247, 250, 252, 0.16);
+
   --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
   --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -39,6 +45,11 @@
   --rule-strong: #343941;
   --accent:      #7ba7d4;
   --accent-soft: #1a2530;
+
+  --band:         #16293c;
+  --on-band:      #e8eef5;
+  --on-band-soft: rgba(232, 238, 245, 0.74);
+  --band-rule:    rgba(232, 238, 245, 0.13);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -54,6 +65,11 @@
     --rule-strong: #343941;
     --accent:      #7ba7d4;
     --accent-soft: #1a2530;
+
+    --band:         #16293c;
+    --on-band:      #e8eef5;
+    --on-band-soft: rgba(232, 238, 245, 0.74);
+    --band-rule:    rgba(232, 238, 245, 0.13);
   }
 }
 
@@ -126,7 +142,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .tl-date,
 .col-index,
 .principle-num,
-.metric-label,
 .cv-meta,
 .tags li,
 .tk-group h4 {
@@ -312,23 +327,6 @@ strong { font-weight: 600; color: var(--ink); }
   margin-top: 32px;
 }
 
-.hero-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-  margin-top: 30px;
-  padding-top: 26px;
-  border-top: 1px solid var(--rule);
-}
-.hero-links a {
-  font-size: 14px;
-  color: var(--muted);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-  transition: color .2s var(--ease), border-color .2s var(--ease);
-}
-.hero-links a:hover { color: var(--ink); border-bottom-color: var(--accent); }
 
 .hero-portrait {
   margin: 0;
@@ -379,63 +377,6 @@ strong { font-weight: 600; color: var(--ink); }
 }
 .btn-ghost:hover { border-color: var(--ink); background: var(--surface); }
 
-/* ── metrics ──────────────────────────────────────────────── */
-
-.section-proof {
-  padding-block: clamp(56px, 7vw, 88px);
-  border-block: 1px solid var(--rule);
-  background: var(--canvas-alt);
-}
-
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-  margin-top: 8px;
-}
-
-.metric {
-  background: var(--canvas-alt);
-  padding: 30px 26px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: background-color .3s var(--ease);
-}
-.metric:hover { background: var(--surface); }
-
-.metric-value {
-  font-family: var(--serif);
-  font-size: clamp(2.1rem, 3.6vw, 2.7rem);
-  line-height: 1;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  white-space: nowrap;
-}
-.metric-value .unit { font-size: 0.62em; }
-.metric-value .arrow {
-  font-family: var(--sans);
-  font-size: 0.44em;
-  color: var(--accent);
-  margin-inline: 0.22em;
-  vertical-align: 0.22em;
-}
-.metric-label {
-  text-transform: none;
-  letter-spacing: 0.01em;
-  font-family: var(--sans);
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.metrics-foot {
-  margin-top: 26px;
-  font-size: 14px;
-  color: var(--muted);
-}
 
 /* ── three columns ────────────────────────────────────────── */
 
@@ -478,24 +419,6 @@ strong { font-weight: 600; color: var(--ink); }
 }
 .card > p { color: var(--ink-soft); font-size: 15.2px; }
 
-.card-metric {
-  margin-top: auto;
-  padding-top: 18px;
-  border-top: 1px solid var(--rule);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px;
-  font-size: 14px;
-}
-.card-metric span {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-.card-metric strong { font-size: 14.5px; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
 .tags li {
@@ -564,21 +487,106 @@ strong { font-weight: 600; color: var(--ink); }
 
 /* ── credentials + toolkit ────────────────────────────────── */
 
-.two-up {
+/* ── credentials: education + toolkit ─────────────────────── */
+
+.section-credentials { background: var(--canvas-alt); border-block: 1px solid var(--rule); }
+
+.edu-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
-  gap: 72px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
 }
 
-.edu { display: grid; gap: 28px; }
-.edu li { border-left: 1px solid var(--rule-strong); padding-left: 20px; }
-.edu h3 { font-size: 1.02rem; margin-bottom: 4px; }
-.edu p { font-size: 14.5px; color: var(--muted); margin: 0; }
-.edu-year { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; color: var(--faint); margin-top: 6px !important; }
+.edu-card {
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--canvas);
+  padding: 30px 28px 26px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .3s var(--ease), transform .3s var(--ease);
+}
+.edu-card:hover { border-color: var(--rule-strong); transform: translateY(-2px); }
 
-.toolkit { display: grid; gap: 26px; }
-.tk-group h4 { margin-bottom: 10px; }
+.edu-mark {
+  width: 62px; height: 62px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 22px;
+  background: var(--canvas-alt);
+  flex: none;
+}
+.edu-mark span {
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.edu-years {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.edu-status {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 2px;
+  padding: 2px 6px;
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+}
+
+.edu-degree { font-size: 1.04rem; margin-bottom: 5px; line-height: 1.35; }
+.edu-inst { font-size: 13.8px; color: var(--muted); margin-bottom: 16px; }
+.edu-why {
+  font-size: 14.4px;
+  line-height: 1.62;
+  color: var(--ink-soft);
+  margin: auto 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+
+.toolkit-block { margin-top: 76px; }
+.toolkit-head { margin-bottom: 34px; }
+.toolkit-intro {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 62ch;
+  margin: 0;
+}
+
+.toolkit {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px 48px;
+}
+.tk-group h4 { margin-bottom: 12px; }
 .tk-group .tags { margin-top: 0; }
+
+@media (max-width: 980px) {
+  .edu-grid { grid-template-columns: 1fr 1fr; }
+  .edu-card:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px) {
+  .edu-grid { grid-template-columns: 1fr; gap: 18px; }
+  .edu-card:last-child { grid-column: auto; }
+  .edu-why { margin-top: 0; }
+  .toolkit { grid-template-columns: 1fr; gap: 28px; }
+  .toolkit-block { margin-top: 56px; }
+}
 
 /* ── contact ──────────────────────────────────────────────── */
 
@@ -628,8 +636,9 @@ strong { font-weight: 600; color: var(--ink); }
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  text-align: center;
 }
 .footer p { margin: 0; }
 .footer-links { display: flex; gap: 22px; }
@@ -671,7 +680,6 @@ strong { font-weight: 600; color: var(--ink); }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-portrait { order: -1; max-width: 208px; }
   .hero-portrait::after { display: none; }
-  .metrics { grid-template-columns: 1fr 1fr; }
   .cards { grid-template-columns: 1fr; }
   .cols-3 { grid-template-columns: 1fr; gap: 34px; }
   .col:last-child { grid-column: auto; }
@@ -684,7 +692,6 @@ strong { font-weight: 600; color: var(--ink); }
 }
 
 @media (max-width: 420px) {
-  .metrics { grid-template-columns: 1fr; }
   .nav-mark-role { display: none; }
 }
 
@@ -693,7 +700,7 @@ strong { font-weight: 600; color: var(--ink); }
   .nav, .theme-toggle { display: none; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .section { padding-block: 24px; }
-  .card, .metric { break-inside: avoid; }
+  .card { break-inside: avoid; }
 }
 
 /* ── platforms ────────────────────────────────────────────── */
@@ -833,3 +840,67 @@ strong { font-weight: 600; color: var(--ink); }
 }
 .platform-nums.is-names { margin-top: 10px; padding-top: 0; border-top: 0; gap: 12px 36px; }
 .platform-nums.is-names .pf-num { font-size: 1.42rem; }
+
+
+/* ============================================================
+   NAVY AMPLIFIED — give the accent real surface area
+   ============================================================ */
+
+/* accent where it used to be grey */
+.eyebrow,
+.section-kicker { color: var(--accent); }
+
+/* primary action carries the accent, not black */
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--accent) 82%, #000);
+  border-color: color-mix(in srgb, var(--accent) 82%, #000);
+  color: #fff;
+}
+:root[data-theme="dark"] .btn-primary { color: var(--canvas); }
+:root[data-theme="dark"] .btn-primary:hover {
+  background: color-mix(in srgb, var(--accent) 84%, #fff);
+  border-color: color-mix(in srgb, var(--accent) 84%, #fff);
+  color: var(--canvas);
+}
+
+
+/* ── band 2: the closing contact block ───────────────────── */
+
+.section-contact {
+  background: var(--band);
+  border-top-color: var(--band);
+}
+.section-contact .section-kicker { color: var(--on-band-soft); }
+.contact-head { color: var(--on-band); }
+.contact-sub  { color: var(--on-band-soft); }
+
+.section-contact .btn-primary {
+  background: var(--on-band);
+  border-color: var(--on-band);
+  color: var(--band);
+}
+.section-contact .btn-primary:hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--band);
+}
+.section-contact .btn-ghost {
+  border-color: color-mix(in srgb, var(--on-band) 42%, transparent);
+  color: var(--on-band);
+  background: transparent;
+}
+.section-contact .btn-ghost:hover {
+  border-color: var(--on-band);
+  background: color-mix(in srgb, var(--on-band) 10%, transparent);
+}
+
+/* ── tinted panels behind the marks ──────────────────────── */
+
+.platform-mark,
+.edu-mark { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 28%, transparent); }
+.platform-mark { color: var(--accent); }
